@@ -19,6 +19,7 @@ refs.form.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 refs.galleryContainer.addEventListener('click', onImageBoxClick);
 
+
 hideButton();
 
 function onSearch(evn) {
