@@ -1,9 +1,10 @@
 import Notiflix from 'notiflix';
-import cardTemplates from './templates/card.hbs';
+import { cardTemplate } from './js/cardTemplate';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import NewsApiService from './js/api';
 import './css/styles.css';
+import { renderGallery } from './js/renderImages';
 
 let lightbox = new SimpleLightbox('.gallery a');
 const newsApiService = new NewsApiService();
@@ -33,7 +34,7 @@ function onSearch(evn) {
   newsApiService.resetPage();
 
   newsApiService.searchRequest().then(data => {
-    if (data.nlength === 0) {
+    if (data.length === 0) {
       hideButton();
       Notiflix.Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
@@ -61,8 +62,8 @@ function onLoadMore() {
   });
 }
 
-function appendCardMarkup(elem) {
-  refs.galleryContainer.insertAdjacentHTML('beforeend', cardTemplates(elem));
+function appendCardMarkup(data) {
+  refs.galleryContainer.insertAdjacentHTML('beforeend', cardTemplate(data));
 }
 
 function clearCardContainer() {
