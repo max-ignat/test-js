@@ -33,7 +33,7 @@ function onSearch(evn) {
   newsApiService.resetPage();
 
   newsApiService.searchRequest().then(data => {
-    if (data.length === 0) {
+    if (data.nlength === 0) {
       hideButton();
       Notiflix.Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
