@@ -4,7 +4,7 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import NewsApiService from './js/api';
 import './css/styles.css';
-import { renderGallery } from './js/renderImages';
+import { render } from './js/renderImages';
 
 let lightbox = new SimpleLightbox('.gallery a');
 const newsApiService = new NewsApiService();
@@ -42,7 +42,7 @@ function onSearch(evn) {
       return;
     }
     Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
-    appendCardMarkup(data);
+    render(data);
     showButton();
     lightbox.refresh();
   });
@@ -52,7 +52,7 @@ function onLoadMore() {
   newsApiService.searchRequest().then(data => {
     try {
       Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
-      appendCardMarkup(data);
+      render(data);
       lightbox.refresh();
       console.log('data: ', data);
     } catch (error) {
@@ -62,7 +62,7 @@ function onLoadMore() {
   });
 }
 
-function appendCardMarkup(data) {
+function render(data) {
   refs.galleryContainer.insertAdjacentHTML('beforeend', cardTemplate(data));
 }
 
